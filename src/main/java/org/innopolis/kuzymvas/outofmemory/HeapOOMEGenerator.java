@@ -19,22 +19,22 @@ public class HeapOOMEGenerator {
     private final int recoverPeriod;
     private final PrintStream output;
 
-
     private final List<MemoryWaster> wasters;
 
     /**
      * Создает новый генератор ошибоки Out of Memory Error: Heap.
+     *
      * @param unrecoverableMemoryPerTick - объем в байтах занимаемой в такт работы (~1 мс) памяти, недоступной для GC
-     * @param recoverableMemoryPerTick - объем в байтах занимаемой в такт работы (~1 мс) памяти, периодически освобождаемой для GC
-     * @param reportPeriod - период в тактах между выводами состояния кучи в выводной поток
-     * @param recoverPeriod - период в тактах между освобожденями памяти для GC
-     * @param output - выводной поток для отчетов
+     * @param recoverableMemoryPerTick   - объем в байтах занимаемой в такт работы (~1 мс) памяти, периодически освобождаемой для GC
+     * @param reportPeriod               - период в тактах между выводами состояния кучи в выводной поток
+     * @param recoverPeriod              - период в тактах между освобожденями памяти для GC
+     * @param output                     - выводной поток для отчетов
      */
     public HeapOOMEGenerator(
             int unrecoverableMemoryPerTick, int recoverableMemoryPerTick, int reportPeriod,
             int recoverPeriod, PrintStream output) {
-        this.unrecoverableMemoryPerTick = unrecoverableMemoryPerTick/INT_SIZE;
-        this.recoverableMemoryPerTick = recoverableMemoryPerTick/INT_SIZE;
+        this.unrecoverableMemoryPerTick = unrecoverableMemoryPerTick / INT_SIZE;
+        this.recoverableMemoryPerTick = recoverableMemoryPerTick / INT_SIZE;
         this.reportPeriod = reportPeriod;
         this.recoverPeriod = recoverPeriod;
         this.output = output;
@@ -42,7 +42,7 @@ public class HeapOOMEGenerator {
     }
 
     /**
-     * Начниает заполнение памяти кучи мусором
+     * Начинает заполнение памяти кучи мусором
      */
     public void generateOOME() {
         int reportCounter = 0;
@@ -83,8 +83,9 @@ public class HeapOOMEGenerator {
 
         /**
          * Создает новый мусорный объект с заданными размерами очищаемой и не очищаемой части
+         *
          * @param unrecoverableSize - размер неочищаемой части в int-ах (двойных словах = 4 байта)
-         * @param recoverableSize  - размер очищаемой части в int-ах (двойных словах = 4 байта)
+         * @param recoverableSize   - размер очищаемой части в int-ах (двойных словах = 4 байта)
          */
         public MemoryWaster(int unrecoverableSize, int recoverableSize) {
             unrecoverable = new int[unrecoverableSize];

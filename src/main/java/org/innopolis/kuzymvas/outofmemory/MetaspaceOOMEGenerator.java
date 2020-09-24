@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryPoolMXBean;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class MetaspaceOOMEGenerator {
     }
 
     /**
-     * Начниает заполнение памяти Metaspace мусором
+     * Начинает заполнение памяти Metaspace мусором
      */
     public void generateOOME() {
         int reportCounter = 0;
@@ -101,7 +100,8 @@ public class MetaspaceOOMEGenerator {
                 final byte[] bytes = IOUtils.toByteArray(this.getClass().getResourceAsStream("UberClass.class"));
                 /*Files.readAllBytes(
                         pathToWasteClass);
-                */return defineClass(null, bytes, 0, bytes.length);
+                */
+                return defineClass(null, bytes, 0, bytes.length);
             } catch (IOException e) {
                 throw new ClassNotFoundException();
             }
